@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>這張，懂我｜情緒解憂雜貨鋪</title>
+    <style>
+        :root {
+            --ink: #4e3b2a;
+            --soft-ink: #7a6048;
+            --paper: #fff8df;
+            --cream: #f7e8c8;
+            --wood: #c9945d;
+            --wood-deep: #8a5c34;
+            --panel: #f2d7ab;
+            --line: #b88956;
+            --note: #fff28e;
+            --blue: #8da2e3;
+            --red: #d94a43;
+            --green: #78a36f;
+            --shadow: 0 24px 60px rgba(91, 63, 34, 0.22);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 12% 18%, rgba(255,255,255,0.95) 0 2px, transparent 3px),
+                radial-gradient(circle at 82% 12%, rgba(255,255,255,0.9) 0 2px, transparent 3px),
+                linear-gradient(135deg, #fffaf0 0%, #f8e8c4 54%, #f0d4a7 100%);
+            padding: 28px;
+        }
+
+        button,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .app {
+            width: min(1180px, 100%);
+            margin: 0 auto;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            gap: 28px;
+            align-items: flex-end;
+            margin-bottom: 26px;
+        }
+
+        .hero h1 {
+            margin: 0;
+            color: #8fa1df;
+            font-size: clamp(2rem, 4vw, 3.35rem);
+            line-height: 1.08;
+            letter-spacing: 0;
+        }
+
+        .hero p {
+            max-width: 520px;
+            margin: 12px 0 0;
+            color: var(--soft-ink);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .hotline {
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            min-width: 148px;
+            padding: 12px 18px;
+            border: 2px solid var(--line);
+            border-radius: 8px;
+            background: rgba(255, 248, 223, 0.85);
+            box-shadow: 6px 6px 0 rgba(138, 92, 52, 0.16);
+            text-align: center;
+        }
+
+        .hotline strong {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(210px, 0.8fr) minmax(330px, 1.2fr) minmax(240px, 0.95fr);
+            gap: 26px;
+            align-items: center;
+        }
+
+        .flow,
+        .context {
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .step,
+        .info {
+            padding: 16px;
+            border: 1px solid rgba(138, 92, 52, 0.25);
+            border-radius: 8px;
+            background: rgba(255, 252, 240, 0.68);
+        }
+
+        .step b,
+        .info b {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--wood-deep);
+            font-size: 1.02rem;
+        }
+
+        .step p,
+        .info p {
+            margin: 0;
+            color: var(--soft-ink);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .machine-wrap {
+            position: relative;
+            display: grid;
+            place-items: center;
+        }
+
+        .machine {
+            width: min(420px, 100%);
+            min-height: 680px;
+            position: relative;
+            padding: 92px 24px 24px;
+            border: 4px solid var(--wood-deep);
+            border-radius: 14px 14px 10px 10px;
+            background:
+                linear-gradient(90deg, rgba(255,255,255,0.16), transparent 18% 82%, rgba(99, 60, 24, 0.08)),
+                repeating-linear-gradient(90deg, #dba76d 0 28px, #d29a5f 28px 54px);
+            box-shadow: var(--shadow), inset 0 0 0 7px rgba(255, 238, 193, 0.45);
+        }
+
+        .machine::before,
+        .machine::after {
+            content: "";
+            position: absolute;
+            top: -26px;
+            width: 8px;
+            height: 34px;
+            border-radius: 5px;
+            background: var(--wood-deep);
+        }
+
+        .machine::before { left: 74px; }
+        .machine::after { right: 74px; }
+
+        .sign {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 74%;
+            padding: 11px 12px 9px;
+            border: 3px solid var(--wood-deep);
+            border-radius: 8px;
+            background: #ffe3b8;
+            color: var(--ink);
+            text-align: center;
+            box-shadow: inset 0 0 0 3px rgba(255,255,255,0.35);
+        }
+
+        .sign strong {
+            display: block;
+            font-size: 1.28rem;
+        }
+
+        .sign span {
+            display: block;
+            margin-top: 2px;
+            font-size: 0.82rem;
+            color: var(--soft-ink);
+        }
+
+        .screen {
+            position: relative;
+            min-height: 238px;
+            padding: 18px;
+            border: 3px solid var(--wood-deep);
+            border-radius: 10px;
+            background:
+                linear-gradient(rgba(255,255,255,0.72), rgba(255,255,255,0.72)),
+                radial-gradient(circle at center, #fffef5, #f1dab4);
+            overflow: visible;
+        }
+
+        .screen-title {
+            margin: 0 0 13px;
+            color: var(--wood-deep);
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .mood-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .mood-btn {
+            min-height: 58px;
+            border: 2px solid rgba(111, 75, 42, 0.25);
+            border-radius: 8px;
+            background: var(--mood-color);
+            color: #3f3022;
+            font-weight: 700;
+            box-shadow: 0 4px 0 rgba(91, 63, 34, 0.14);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+        }
+
+        .mood-btn:hover,
+        .mood-btn.active {
+            transform: translateY(-2px);
+            border-color: var(--wood-deep);
+            box-shadow: 0 7px 0 rgba(91, 63, 34, 0.18);
+        }
+
+        .card-output {
+            height: 254px;
+            margin: 20px auto 16px;
+            display: grid;
+            place-items: center;
+            border: 3px solid var(--wood-deep);
+            border-radius: 7px;
+            background: #765033;
+            box-shadow: inset 0 4px 10px rgba(0,0,0,0.22);
+        }
+
+        .emotion-card {
+            --card-color: #f6d66c;
+            --card-soft: #fff3bf;
+            --card-ink: #5a3a28;
+            width: 156px;
+            height: 226px;
+            position: relative;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 7px;
+            padding: 12px 11px 10px;
+            border: 5px solid var(--card-color);
+            border-radius: 6px;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,255,255,0.16)),
+                var(--card-soft);
+            color: var(--ink);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(-180px) rotate(-9deg);
+            box-shadow: 8px 9px 0 rgba(73, 50, 31, 0.18), inset 0 0 0 2px rgba(255,255,255,0.7);
+            overflow: visible;
+        }
+
+        .emotion-card::before,
+        .emotion-card::after {
+            content: "";
+            position: absolute;
+            inset: 9px;
+            border: 1px solid rgba(92, 67, 44, 0.24);
+            border-radius: 5px;
+            pointer-events: none;
+        }
+
+        .emotion-card::after {
+            inset: 14px;
+            border-color: rgba(92, 67, 44, 0.16);
+        }
+
+        .card-kicker {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 22px;
+            padding: 1px 7px;
+            justify-self: center;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.58);
+            color: var(--card-ink);
+            font-size: 0.68rem;
+            font-weight: 900;
+            letter-spacing: 0;
+        }
+
+        .card-face {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 6px;
+            min-height: 0;
+        }
+
+        .card-title {
+            color: var(--card-ink);
+            font-size: 1.52rem;
+            font-weight: 900;
+            line-height: 1;
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.75);
+        }
+
+        .card-scene {
+            position: relative;
+            height: 92px;
+            border-radius: 5px;
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.12) 0 58%, rgba(117, 84, 54, 0.13) 59% 100%),
+                radial-gradient(circle at 20% 22%, rgba(255,255,255,0.62) 0 2px, transparent 3px),
+                radial-gradient(circle at 80% 19%, rgba(255,255,255,0.62) 0 2px, transparent 3px);
+            overflow: hidden;
+        }
+
+        .card-scene::before,
+        .card-scene::after {
+            content: "";
+            position: absolute;
+        }
+
+        .card-scene::before {
+            left: 50%;
+            bottom: 16px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50% 50% 44% 44%;
+            background: #f1bd9a;
+            transform: translateX(-50%);
+            box-shadow: 0 22px 0 8px #6586a7;
+        }
+
+        .card-scene::after {
+            left: 41%;
+            bottom: 32px;
+            width: 18px;
+            height: 8px;
+            border-radius: 10px 10px 3px 3px;
+            background: #4d372d;
+            transform: rotate(-7deg);
+        }
+
+        .scene-rain {
+            background:
+                repeating-linear-gradient(100deg, transparent 0 13px, rgba(80, 111, 145, 0.3) 14px 16px),
+                linear-gradient(180deg, #c7d9ed 0 58%, #9fb8cc 59% 100%);
+        }
+
+        .scene-rain .scene-prop {
+            left: 7px;
+            bottom: 10px;
+            width: 33px;
+            height: 20px;
+            border: 3px solid #5a7895;
+            border-top: 0;
+            border-radius: 0 0 18px 18px;
+        }
+
+        .scene-rain .scene-prop::after {
+            content: "";
+            position: absolute;
+            left: 13px;
+            top: 17px;
+            width: 3px;
+            height: 17px;
+            border-radius: 2px;
+            background: #5a7895;
+        }
+
+        .scene-flame {
+            background:
+                radial-gradient(circle at 76% 27%, #ffe37a 0 9px, transparent 10px),
+                linear-gradient(180deg, #ffd6ad 0 58%, #d98d67 59% 100%);
+        }
+
+        .scene-flame .scene-prop {
+            left: 12px;
+            bottom: 12px;
+            width: 25px;
+            height: 32px;
+            border-radius: 50% 50% 50% 5px;
+            background: #e25239;
+            transform: rotate(38deg);
+            box-shadow: inset -7px -8px 0 #ffd469;
+        }
+
+        .scene-star {
+            background:
+                radial-gradient(circle at 17% 22%, #fff2a0 0 5px, transparent 6px),
+                radial-gradient(circle at 84% 22%, #fff2a0 0 4px, transparent 5px),
+                linear-gradient(180deg, #ffeab0 0 58%, #e6b66e 59% 100%);
+        }
+
+        .scene-star .scene-prop {
+            left: 12px;
+            top: 11px;
+            width: 27px;
+            height: 27px;
+            background: #f5bf4f;
+            clip-path: polygon(50% 0, 61% 34%, 98% 34%, 68% 54%, 80% 91%, 50% 68%, 20% 91%, 32% 54%, 2% 34%, 39% 34%);
+        }
+
+        .scene-moon {
+            background:
+                radial-gradient(circle at 78% 22%, #fff2b4 0 17px, transparent 18px),
+                linear-gradient(180deg, #a9c7e2 0 58%, #7897bb 59% 100%);
+        }
+
+        .scene-moon .scene-prop {
+            left: 13px;
+            bottom: 9px;
+            width: 43px;
+            height: 16px;
+            border-radius: 50%;
+            background: #fff3cd;
+            box-shadow: 31px 5px 0 -2px #fff3cd;
+        }
+
+        .scene-bubble {
+            background:
+                radial-gradient(circle at 16% 18%, #fff8e7 0 11px, transparent 12px),
+                radial-gradient(circle at 82% 23%, #fff8e7 0 15px, transparent 16px),
+                linear-gradient(180deg, #f2c796 0 58%, #c98958 59% 100%);
+        }
+
+        .scene-bubble .scene-prop {
+            left: 18px;
+            top: 12px;
+            width: 36px;
+            height: 21px;
+            border-radius: 14px;
+            background: #fff8e7;
+        }
+
+        .scene-bubble .scene-prop::after {
+            content: "";
+            position: absolute;
+            left: 22px;
+            top: 22px;
+            width: 11px;
+            height: 10px;
+            background: #fff8e7;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+        }
+
+        .scene-water {
+            background:
+                repeating-radial-gradient(ellipse at center 70%, rgba(66, 123, 150, 0.25) 0 4px, transparent 5px 16px),
+                linear-gradient(180deg, #c7e6eb 0 58%, #8bbac5 59% 100%);
+        }
+
+        .scene-water .scene-prop {
+            left: 10px;
+            bottom: 19px;
+            width: 40px;
+            height: 18px;
+            border: 3px solid #4f879e;
+            border-top: 0;
+            border-left-color: transparent;
+            border-right-color: transparent;
+            border-radius: 0 0 50% 50%;
+        }
+
+        .scene-leaf {
+            background:
+                radial-gradient(circle at 80% 25%, #eff6d3 0 10px, transparent 11px),
+                linear-gradient(180deg, #dbe5c8 0 58%, #96ac7c 59% 100%);
+        }
+
+        .scene-leaf .scene-prop {
+            left: 12px;
+            bottom: 17px;
+            width: 44px;
+            height: 35px;
+            border-radius: 50% 4px 50% 4px;
+            background: #73905a;
+            transform: rotate(-22deg);
+        }
+
+        .scene-prop {
+            position: absolute;
+        }
+
+        .card-line {
+            align-self: center;
+            width: 100%;
+            min-height: 42px;
+            display: grid;
+            place-items: center;
+            padding: 5px 7px;
+            border: 1px solid rgba(92, 67, 44, 0.26);
+            border-radius: 5px;
+            background: rgba(255, 253, 242, 0.76);
+            color: #4d3d2a;
+            font-size: 0.68rem;
+            font-weight: 900;
+            line-height: 1.35;
+        }
+
+        .card-back-note {
+            position: absolute;
+            right: -38px;
+            top: 20px;
+            width: 56px;
+            height: 174px;
+            border: 3px solid rgba(130, 92, 62, 0.55);
+            border-radius: 7px;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,0.58), rgba(255,255,255,0.06)),
+                var(--card-soft);
+            opacity: 0.75;
+            transform: rotate(7deg);
+            box-shadow: 5px 6px 0 rgba(73, 50, 31, 0.12);
+        }
+
+        .card-back-note::before {
+            content: "";
+            position: absolute;
+            inset: 11px;
+            border: 1px solid rgba(92, 67, 44, 0.22);
+            border-radius: 5px;
+        }
+
+        .card-back-note::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 67px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(92, 67, 44, 0.22);
+            transform: translateX(-50%);
+        }
+
+        .card-footer {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            color: var(--card-ink);
+            font-size: 0.62rem;
+            font-weight: 900;
+        }
+
+        .card-footer strong {
+            font-size: 0.82rem;
+        }
+
+        .card-phone {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .emotion-card.show {
+            animation: cardDrop 0.7s cubic-bezier(.2,.72,.18,1.14) forwards;
+        }
+
+        .draw-button {
+            width: 100%;
+            min-height: 52px;
+            border: 0;
+            border-radius: 8px;
+            background: linear-gradient(#ffcf75, #e59b32);
+            color: #51351d;
+            font-weight: 900;
+            box-shadow: 0 6px 0 #9a642b;
+        }
+
+        .note-area {
+            margin-top: 18px;
+            padding: 16px;
+            border: 3px solid var(--wood-deep);
+            border-radius: 10px;
+            background: rgba(255, 239, 204, 0.8);
+        }
+
+        .note {
+            width: 100%;
+            min-height: 142px;
+            padding: 18px 16px;
+            border: 0;
+            outline: 0;
+            resize: vertical;
+            border-radius: 4px;
+            background:
+                linear-gradient(135deg, transparent 0 83%, rgba(183, 151, 32, 0.24) 84% 100%),
+                var(--note);
+            color: #4b3a24;
+            line-height: 1.7;
+            box-shadow: 7px 7px 0 rgba(105, 72, 35, 0.16);
+        }
+
+        .mail-slot {
+            position: relative;
+            height: 56px;
+            margin: 20px 24px 4px;
+            border: 4px solid var(--wood-deep);
+            border-radius: 30px;
+            background: #4a3023;
+            box-shadow: inset 0 6px 10px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        .mail-slot::after {
+            content: "";
+            position: absolute;
+            inset: 18px 22px;
+            border-radius: 99px;
+            background: #f1d9a9;
+            opacity: 0.35;
+        }
+
+        .submit-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: center;
+            margin-top: 14px;
+        }
+
+        .submit-row span {
+            color: var(--soft-ink);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .send-button,
+        .reset-button {
+            border: 0;
+            border-radius: 8px;
+            font-weight: 800;
+        }
+
+        .send-button {
+            min-height: 46px;
+            padding: 0 20px;
+            background: #6e4a2d;
+            color: #fff9ea;
+            box-shadow: 0 5px 0 #3c2619;
+        }
+
+        .reset-button {
+            width: 100%;
+            min-height: 44px;
+            margin-top: 16px;
+            background: #fff7df;
+            color: var(--wood-deep);
+            border: 2px solid var(--line);
+        }
+
+        .effect {
+            position: absolute;
+            left: 50%;
+            bottom: 140px;
+            translate: -50% 0;
+            width: 180px;
+            min-height: 72px;
+            display: grid;
+            place-items: center;
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--wood-deep);
+            font-weight: 900;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 12px 24px rgba(68, 42, 21, 0.18);
+        }
+
+        .effect.show {
+            animation: transformNote 1.45s ease forwards;
+        }
+
+        .base {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 12px;
+            align-items: center;
+            margin-top: 18px;
+            padding: 11px 13px;
+            border: 3px solid var(--wood-deep);
+            border-radius: 8px;
+            background: #c88d55;
+            color: #fff9ea;
+        }
+
+        .brand {
+            font-size: 1.1rem;
+            font-weight: 900;
+        }
+
+        .dial {
+            display: inline-grid;
+            place-items: center;
+            min-width: 86px;
+            min-height: 34px;
+            border-radius: 99px;
+            background: #fff1c7;
+            color: var(--wood-deep);
+            font-weight: 900;
+        }
+
+        .qr-box {
+            display: grid;
+            place-items: center;
+            width: 126px;
+            height: 126px;
+            margin: 12px 0;
+            border: 8px solid #fff;
+            background:
+                linear-gradient(90deg, #111 10px, transparent 10px 20px, #111 20px 30px, transparent 30px 40px),
+                linear-gradient(#111 10px, transparent 10px 20px, #111 20px 30px, transparent 30px 40px),
+                #fff;
+            background-size: 40px 40px;
+            box-shadow: 0 8px 18px rgba(91, 63, 34, 0.18);
+        }
+
+        .qr-box span {
+            padding: 3px 6px;
+            background: #fff;
+            color: var(--wood-deep);
+            font-size: 0.8rem;
+            font-weight: 900;
+        }
+
+        .mini-card {
+            padding: 14px;
+            border-radius: 8px;
+            background: #eff4ff;
+            border: 1px solid rgba(98, 111, 158, 0.25);
+            color: #465277;
+            line-height: 1.6;
+        }
+
+        .status {
+            min-height: 28px;
+            margin-top: 12px;
+            color: var(--wood-deep);
+            font-weight: 800;
+            text-align: center;
+        }
+
+        @keyframes cardDrop {
+            0% { opacity: 0; transform: translateY(-180px) rotate(-9deg); }
+            72% { opacity: 1; transform: translateY(10px) rotate(2deg); }
+            100% { opacity: 1; transform: translateY(0) rotate(0); }
+        }
+
+        @keyframes transformNote {
+            0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+            18% { opacity: 1; transform: translateY(0) scale(1); }
+            74% { opacity: 1; filter: brightness(1.05); }
+            100% { opacity: 0; transform: translateY(-72px) scale(1.08); }
+        }
+
+        @media (max-width: 940px) {
+            body { padding: 22px; }
+            .hero { align-items: stretch; flex-direction: column; }
+            .hotline { justify-self: start; }
+            .layout { grid-template-columns: 1fr; }
+            .flow { order: 2; }
+            .machine-wrap { order: 1; }
+            .context { order: 3; }
+            .machine { min-height: 660px; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 16px; }
+            .machine { padding-inline: 16px; min-height: 690px; }
+            .sign { width: 82%; }
+            .mood-grid { grid-template-columns: 1fr; }
+            .submit-row { grid-template-columns: 1fr; }
+            .send-button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <main class="app">
+        <section class="hero" aria-labelledby="page-title">
+            <div>
+                <h1 id="page-title">這張，懂我</h1>
+                <p>以視覺、直覺完成自我覺察的啟程。選一個靠近現在的心情，抽一張小卡，把想放下的話交給張老師。</p>
+            </div>
+            <div class="hotline" aria-label="張老師服務專線">
+                <span>張老師專線</span>
+                <strong>1980</strong>
+            </div>
+        </section>
+
+        <section class="layout">
+            <aside class="flow" aria-label="互動流程">
+                <div class="step">
+                    <b>Step 1：抽取</b>
+                    <p>用心情按鈕選擇當下狀態，再按下機台抽卡。</p>
+                </div>
+                <div class="step">
+                    <b>Step 2：覺察</b>
+                    <p>把想放下的煩惱、感受或一句話寫在便利貼上。</p>
+                </div>
+                <div class="step">
+                    <b>Step 3：投遞</b>
+                    <p>送進匿名投遞口，讓情緒有一個可以離開的出口。</p>
+                </div>
+                <div class="step">
+                    <b>Step 4：轉化</b>
+                    <p>機台會回應一段溫柔的視覺回饋，陪你把心情安放好。</p>
+                </div>
+            </aside>
+
+            <section class="machine-wrap" aria-label="情緒解憂雜貨鋪互動機台">
+                <div class="machine">
+                    <div class="sign">
+                        <strong>情緒解憂雜貨鋪</strong>
+                        <span>互動式機台</span>
+                    </div>
+
+                    <div class="screen">
+                        <p class="screen-title">請選擇最靠近此刻的心情</p>
+                        <div class="mood-grid" id="moodGrid"></div>
+                    </div>
+
+                    <div class="card-output" aria-live="polite">
+                        <div class="emotion-card show" id="emotionCard">
+                            <div class="card-kicker">EMOTION CARD</div>
+                            <div class="card-face">
+                                <div class="card-title">等待抽取</div>
+                                <div class="card-scene scene-star"><span class="scene-prop"></span></div>
+                                <div class="card-line">先選心情，再抽一張小卡。</div>
+                            </div>
+                            <div class="card-back-note" aria-hidden="true"></div>
+                            <div class="card-footer"><strong>張老師</strong><span class="card-phone">☎ 1980</span></div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="draw-button" id="drawButton">抽取心情小卡</button>
+
+                    <div class="note-area">
+                        <textarea class="note" id="noteInput" aria-label="想對張老師說的話" placeholder="親愛的張老師，我想說..."></textarea>
+                        <div class="submit-row">
+                            <span>內容只會在這次互動中顯示，送出後不會儲存在網頁裡。</span>
+                            <button type="button" class="send-button" id="sendButton">投入</button>
+                        </div>
+                        <div class="status" id="statusText" aria-live="polite"></div>
+                    </div>
+
+                    <div class="mail-slot" aria-hidden="true"></div>
+                    <div class="effect" id="effectBox">張老師已收到</div>
+
+                    <div class="base">
+                        <div class="brand">張老師｜陪伴你整理情緒</div>
+                        <div class="dial">1980</div>
+                    </div>
+
+                    <button type="button" class="reset-button" id="resetButton">重新開始</button>
+                </div>
+            </section>
+
+            <aside class="context" aria-label="張老師資訊">
+                <div class="info">
+                    <b>這張，懂我</b>
+                    <p>從「教導」轉向「同理」，用年輕世代的語言建立第一印象的信任感。</p>
+                </div>
+                <div class="info">
+                    <b>同理文字</b>
+                    <p>感受先被接住，答案才有機會慢慢靠近。</p>
+                </div>
+                <div class="qr-box" aria-label="QR code 視覺區">
+                    <span>QR</span>
+                </div>
+                <div class="mini-card">
+                    <strong>安全導流</strong><br>
+                    附上 QR CODE 與 1980 專線資訊，引導至張老師服務入口，將求助日常化。
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <script>
+        const moods = [
+            {
+                label: "不開心",
+                color: "#c9a27b",
+                soft: "#d8e7f5",
+                ink: "#304a67",
+                icon: "rain",
+                cards: ["先陪自己難過一下，也是一種勇敢。", "今天不用很快好起來，先被接住就好。", "眼淚不是失敗，是心正在排水。"],
+                effect: "濾心啟動：把沉沉的心事慢慢沉澱"
+            },
+            {
+                label: "生氣",
+                color: "#df4545",
+                soft: "#ffd9bd",
+                ink: "#763125",
+                icon: "flame",
+                cards: ["火很燙，先不要急著吞下去。", "你可以生氣，也可以慢慢說。", "這團火正在提醒你：某件事很重要。"],
+                effect: "火焰轉化：把刺刺的感受燒成灰燼"
+            },
+            {
+                label: "開心",
+                color: "#f6d66c",
+                soft: "#fff0a8",
+                ink: "#8a5a12",
+                icon: "star",
+                cards: ["把今天的亮光留一點給明天。", "快樂值得被記得，不用偷偷收起來。", "這一刻很好，你也很好。"],
+                effect: "星光保存：把快樂妥善收進口袋"
+            },
+            {
+                label: "愛睏巴巴",
+                color: "#80a8d8",
+                soft: "#cfe2f2",
+                ink: "#314f72",
+                icon: "moon",
+                cards: ["你不是偷懶，你可能只是累了。", "先讓身體回電，心才有力氣。", "休息不是暫停人生，是補充燃料。"],
+                effect: "暖光補給：允許自己慢慢回電"
+            },
+            {
+                label: "你不懂啦",
+                color: "#d49a6a",
+                soft: "#f5cfaa",
+                ink: "#704329",
+                icon: "bubble",
+                cards: ["被懂之前，先不用急著解釋完美。", "說不清楚也沒關係，感受本來就會打結。", "你可以先保留，也可以慢慢讓人靠近。"],
+                effect: "訊號連線：有人正在試著靠近你的頻率"
+            },
+            {
+                label: "心如止水",
+                color: "#b8dce5",
+                soft: "#d8eef1",
+                ink: "#356271",
+                icon: "water",
+                cards: ["平靜也可以是一種正在整理。", "安靜不是空白，是心有了空間。", "讓水面慢慢穩下來，答案會比較清楚。"],
+                effect: "水波展開：讓安靜替你留一點空間"
+            },
+            {
+                label: "無奈",
+                color: "#cbd0c5",
+                soft: "#e0e7cf",
+                ink: "#5b6542",
+                icon: "leaf",
+                cards: ["卡住的地方，也許需要一個出口。", "不是所有事情都要你一個人扛。", "先承認很難，再找一個小小的下一步。"],
+                effect: "萌芽生成：從無奈裡長出下一步"
+            }
+        ];
+
+        const moodGrid = document.getElementById("moodGrid");
+        const emotionCard = document.getElementById("emotionCard");
+        const drawButton = document.getElementById("drawButton");
+        const sendButton = document.getElementById("sendButton");
+        const resetButton = document.getElementById("resetButton");
+        const noteInput = document.getElementById("noteInput");
+        const statusText = document.getElementById("statusText");
+        const effectBox = document.getElementById("effectBox");
+        let selectedMood = moods[0];
+
+        function pickCard(mood) {
+            const index = Math.floor(Math.random() * mood.cards.length);
+            return mood.cards[index];
+        }
+
+        function renderEmotionCard(mood, line) {
+            const cardSoft = mood.soft || "#fff0a8";
+            const cardInk = mood.ink || "#8a5a12";
+            const cardIcon = mood.icon || "star";
+            emotionCard.style.setProperty("--card-color", mood.color);
+            emotionCard.style.setProperty("--card-soft", cardSoft);
+            emotionCard.style.setProperty("--card-ink", cardInk);
+            emotionCard.innerHTML = `
+                <div class="card-kicker">EMOTION CARD</div>
+                <div class="card-face">
+                    <div class="card-title">${mood.label}</div>
+                    <div class="card-scene scene-${cardIcon}"><span class="scene-prop"></span></div>
+                    <div class="card-line">${line}</div>
+                </div>
+                <div class="card-back-note" aria-hidden="true"></div>
+                <div class="card-footer"><strong>張老師</strong><span class="card-phone">☎ 1980</span></div>
+            `;
+        }
+
+        function renderMoods() {
+            moods.forEach((mood, index) => {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = "mood-btn";
+                button.textContent = mood.label;
+                button.style.setProperty("--mood-color", mood.color);
+                button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+                if (index === 0) button.classList.add("active");
+
+                button.addEventListener("click", () => {
+                    selectedMood = mood;
+                    document.querySelectorAll(".mood-btn").forEach(item => {
+                        item.classList.remove("active");
+                        item.setAttribute("aria-pressed", "false");
+                    });
+                    button.classList.add("active");
+                    button.setAttribute("aria-pressed", "true");
+                    statusText.textContent = `已選擇：${mood.label}`;
+                });
+
+                moodGrid.appendChild(button);
+            });
+        }
+
+        function drawCard() {
+            emotionCard.classList.remove("show");
+            void emotionCard.offsetWidth;
+            renderEmotionCard(selectedMood, pickCard(selectedMood));
+            emotionCard.classList.add("show");
+            statusText.textContent = "小卡已掉落，現在可以寫下想投遞的話。";
+        }
+
+        function submitNote() {
+            if (!noteInput.value.trim()) {
+                noteInput.focus();
+                statusText.textContent = "先寫下一點點，再把它交給機台。";
+                return;
+            }
+
+            effectBox.classList.remove("show");
+            void effectBox.offsetWidth;
+            effectBox.textContent = selectedMood.effect;
+            effectBox.classList.add("show");
+            statusText.textContent = "張老師已收到。謝謝你願意分享你的心情。";
+            noteInput.value = "";
+        }
+
+        function resetMachine() {
+            selectedMood = moods[0];
+            document.querySelectorAll(".mood-btn").forEach((button, index) => {
+                button.classList.toggle("active", index === 0);
+                button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+            });
+            emotionCard.classList.remove("show");
+            renderEmotionCard({ label: "等待抽取", color: "#f6d66c", soft: "#fff0a8", ink: "#8a5a12", icon: "star" }, "先選心情，再抽一張小卡。");
+            emotionCard.classList.add("show");
+            noteInput.value = "";
+            statusText.textContent = "";
+            effectBox.classList.remove("show");
+        }
+
+        renderMoods();
+        drawButton.addEventListener("click", drawCard);
+        sendButton.addEventListener("click", submitNote);
+        resetButton.addEventListener("click", resetMachine);
+    </script>
+</body>
+</html>
